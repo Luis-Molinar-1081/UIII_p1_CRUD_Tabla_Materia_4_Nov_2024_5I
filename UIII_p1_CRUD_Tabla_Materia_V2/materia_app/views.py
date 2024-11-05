@@ -1,0 +1,18 @@
+from django.shortcuts import render,redirect
+from .models import Materia
+# Create your views here.
+
+def inicio_visita(request):
+    lasmaterias=Materia.objects.all()
+
+    return render(request,"gestionarMateria.html",{"mismaterias":lasmaterias})
+
+def registrarmateria(request):
+    codigo=request.POST["txtcodigo"]
+    nombre=request.POST["txtnombre"]
+    creditos=request.POST["numcreditos"]
+
+    guardarmateria=Materia.objects.create(codigo=codigo,nombre=nombre,creditos=creditos)
+
+    return redirect("/")
+
